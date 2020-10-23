@@ -51,6 +51,10 @@ async function main() {
     Key: 'empresas.csv',
   };
 
+  // const fileStream = fs.createReadStream(
+  //   path.resolve(__dirname, 'empresas.csv')
+  // );
+
   const fileStream = s3.getObject(surveyFile).createReadStream();
 
   await pipelineAsync(
