@@ -33,6 +33,8 @@ const processDataStream = (finalData) =>
     write: async (chunk, encoding, cb) => {
       const data = JSON.parse(chunk);
 
+      console.log(data);
+
       cb();
     },
   });
@@ -51,15 +53,11 @@ async function main() {
 
   const fileStream = s3.getObject(surveyFile).createReadStream();
 
-  // const fileStream = fs.createReadStream(
-  //   path.resolve(__dirname, 'empresas.csv')
-  // );
-
   await pipelineAsync(
     fileStream,
     csvtojson(),
     mapStream(elapsedBytes),
-    processDataStream(refFinalData)
+    processDataStream()
   );
 
   console.timeEnd('elapsed time');
