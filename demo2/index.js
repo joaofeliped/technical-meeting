@@ -1,3 +1,5 @@
+const AWS = require('aws-sdk');
+
 const csvtojson = require('csvtojson');
 const { cnpj } = require('cpf-cnpj-validator');
 
@@ -7,6 +9,7 @@ const fs = require('fs');
 const { Transform, Writable, pipeline } = require('stream');
 const { promisify } = require('util');
 
+const s3 = new AWS.S3();
 const pipelineAsync = promisify(pipeline);
 
 const mapStream = (elapsedBytes) =>
